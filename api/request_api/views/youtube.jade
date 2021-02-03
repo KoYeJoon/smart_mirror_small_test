@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+   -for(var idx=0;idx<items.length;idx++)
+        div(class="youtube_list")
+            br
+            p="title : " + items[idx]["snippet"]["title"]
+            p="url : " + "https://www.youtube.com/watch?v=" +items[idx]["id"]["videoId"]
+            hr
