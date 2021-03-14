@@ -8,7 +8,7 @@ const dotenv = require("dotenv").config();
 
 
 router.get('/', function(req, res, next) {
-    //var ip_address = ip.address()
+    var ip_address = ip.address()
     const access_key = process.env.NAVER_ACCESS_API_KEY;
     const secret_key = process.env.NAVER_SECRET_API_KEY;
   

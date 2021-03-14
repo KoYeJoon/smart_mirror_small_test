@@ -29,10 +29,12 @@ router.get('/',function(req,res,next){
       .then(function(result) {
           //console.log(result)
           const items = result["items"]; 
-          res.render('youtube', { items: items })
+          res.render('youtube', { items: items });
+          
         })
       .catch(function(err){
         console.log(err)
+
         res.render('index', { title: 'Express' });
       })
   })
