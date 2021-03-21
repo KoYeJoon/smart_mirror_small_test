@@ -5,6 +5,7 @@ from io import BytesIO
 from PIL import Image, ImageDraw
 import cognitive_face as CF
 import os
+import sys
 from dotenv import load_dotenv
 load_dotenv()
 #
@@ -23,13 +24,13 @@ CF.BaseUrl.set(BASE_URL)
 cnt=0
 i=0
 #얼굴 인식 캐스케이드 파일 읽는다
-face_cascade = cv2.CascadeClassifier('/Users/yejoonko/git/Project/smart_mirror/python/opencv/haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier('/Users/yejoonko/git/Project/smart_mirror_small_test/api/python/opencv/haarcascade_frontalface_default.xml')
 arr=[1,2,3,4,5]
 imgArr=[]
 emoArr=[]
 
 emoName=['anger','contempt','disgust','fear','happiness','neutral','sadness','surprise']
-filePath="/Users/yejoonko/git/Project/smart_mirror/python/data/"
+filePath="/Users/yejoonko/git/Project/smart_mirror_small_test/api/python/data/"
 def removeAllFile(filePath):
     if os.path.exists(filePath):
         for file in os.scandir(filePath):
@@ -61,9 +62,9 @@ while(True):
     #i+=1
     if i<6:
         cv2.IMREAD_UNCHANGED
-        cv2.imwrite("/Users/yejoonko/git/Project/smart_mirror/python/data/" + str(i) + ".png", frame)
+        cv2.imwrite("/Users/yejoonko/git/Project/smart_mirror_small_test/api/python/data/" + str(i) + ".png", frame)
         #img_url = 'C:/Users/Hong Sumin/Desktop/4-1/capture/1.png' # 이미지 파일의 경로
-        imgArr.append('/Users/yejoonko/git/Project/smart_mirror/python/data/'+str(i)+'.png')
+        imgArr.append('/Users/yejoonko/git/Project/smart_mirror_small_test/api/python/data/'+str(i)+'.png')
         i+=1
 
     # openCV에서 얼굴이 인식되었더라도 azure에서는 인식되지 않을 수 있음.
@@ -89,7 +90,7 @@ while(True):
     #print("faces!!!",faces)
     #webCamera라는 이름으로 실시간 화면을 보여준다.
 
-    cv2.imshow('webCamera',frame)
+    #cv2.imshow('webCamera',frame)
     # q를 누르면 종료되도록 하는 코드이다.
     if cv2.waitKey(1) == ord('q'):
         break
@@ -102,6 +103,3 @@ cv2.destroyAllWindows()
 # 데이터 node.js로 전송 (http://localhost:3001)
 data = {'emotion' : emoName[emoArr.index(max(emoArr))]}
 print(emoName[emoArr.index(max(emoArr))])
-res = requests.post('http://localhost:3001/emotion',data = data)
-
-

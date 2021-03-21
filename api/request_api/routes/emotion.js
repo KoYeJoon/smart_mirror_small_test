@@ -21,15 +21,11 @@ router.get('/',function(req,res,next){
     PythonShell.run('/Users/yejoonko/git/Project/smart_mirror_small_test/api/python/faceRecognition.py', { args: [] }, function (err, data) { 
         if (err) throw err;  
         console.log(data);
-        res.render('emotion',{emotion : data})
+        res.render('emotion',{emotion: data})
      })
       
 })
 
-router.post('/',function(req,res,next){
-    console.log(req.body);
-    // res.render('emotion', { emotion : req.body.emotion});
-})
 
 
 
